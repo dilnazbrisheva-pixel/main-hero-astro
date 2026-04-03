@@ -1,0 +1,183 @@
+---
+import './privacy.scss';
+
+type Section = {
+  title: string;
+  text?: string[];
+  list?: string[];
+};
+
+const sections: Section[] = [
+  {
+    title: "Введение",
+    text: [
+      'Настоящая Политика конфиденциальности описывает, как ТОО "Gamechanger" ("мы", "нас" или "наш") собирает, использует и защищает вашу персональную информацию при использовании нашего сервиса. Мы серьезно относимся к защите ваших данных и соблюдаем все применимые законы о защите персональных данных.',
+    ],
+  },
+  {
+    title: "Собираемая информация",
+    text: ["Мы можем собирать следующие типы информации:"],
+    list: [
+      "Контактная информация (имя, email, телефон)",
+      "Данные об использовании сервиса",
+      "Записи телефонных разговоров (с вашего согласия)",
+      "Техническая информация (IP-адрес, тип браузера, устройство)",
+      "Данные CRM-систем при интеграции",
+    ],
+  },
+  {
+    title: "Использование информации",
+    text: ["Мы используем собранную информацию для:"],
+    list: [
+      "Предоставления и улучшения наших услуг",
+      "Формирования отчетов и аналитики",
+      "Связи с вами по вопросам сервиса",
+      "Соблюдения законодательных требований",
+    ],
+  },
+  {
+    title: "Защита данных",
+    text: [
+      "Мы применяем современные технологии шифрования и безопасности для защиты ваших данных. Все данные передаются по защищенным каналам (SSL/TLS), а хранение осуществляется на серверах с многоуровневой системой безопасности. Доступ к персональным данным имеют только уполномоченные сотрудники.",
+    ],
+  },
+  {
+    title: "Передача данных третьим лицам",
+    text: [
+      "Мы не продаем и не передаем ваши персональные данные третьим лицам, за исключением случаев, предусмотренных законодательством, или с вашего явного согласия. Мы можем использовать сторонние сервисы для обработки данных (хостинг, аналитика), которые обязаны соблюдать конфиденциальность.",
+    ],
+  },
+  {
+    title: "Ваши права",
+    text: ["Вы имеете право:"],
+    list: [
+      "Запрашивать доступ к вашим персональным данным",
+      "Требовать исправления неточных данных",
+      "Запрашивать удаление ваших данных",
+      "Отозвать согласие на обработку данных",
+      "Получить копию ваших данных в структурированном формате",
+    ],
+  },
+  {
+    title: "Cookies и аналитика",
+    text: [
+      "Мы используем cookies и схожие технологии для улучшения работы сервиса, аналитики и персонализации. Вы можете управлять настройками cookies в вашем браузере.",
+    ],
+  },
+  {
+    title: "Изменения в политике",
+    text: [
+      "Мы можем обновлять настоящую Политику конфиденциальности. О существенных изменениях мы уведомим вас по электронной почте или через интерфейс сервиса. Рекомендуем периодически проверять эту страницу.",
+    ],
+  },
+];
+---
+
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Политика конфиденциальности</title>
+  </head>
+  <body>
+    <main class="privacy-page">
+      <div class="privacy-page__container">
+        <a href="/" class="privacy-page__back">← Вернуться назад</a>
+
+        <section class="document-card">
+          <header class="document-card__header">
+            <h1 class="document-card__title">Политика конфиденциальности</h1>
+            <p class="document-card__meta">Последнее обновление: 17 марта 2026</p>
+          </header>
+
+          <div class="document-card__content">
+            {sections.map((section, index) => (
+              <article class="document-section">
+                <h2 class="document-section__title">
+                  {index + 1}. {section.title}
+                </h2>
+
+                <div class="document-section__items">
+                  <div class="document-section__item">
+                    {section.text?.map((paragraph) => (
+                      <p class="document-section__text">{paragraph}</p>
+                    ))}
+
+                    {section.list && (
+                      <ul class="document-section__list">
+                        {section.list.map((item) => (
+                          <li>{item}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+              </article>
+            ))}
+
+            <article class="document-section">
+              <h2 class="document-section__title">9. Контакты</h2>
+
+              <div class="document-section__items">
+                <div class="document-section__item">
+                  <p class="document-section__text">
+                    По вопросам, связанным с использованием Сервисов и условиями
+                    Соглашения, обращайтесь по указанным контактам.
+                  </p>
+                </div>
+              </div>
+
+              <div class="document-card__contact-links">
+                <div class="document-card__contact-link-item">
+                  Email:
+                  <a
+                    href="mailto:sales@gamechanger.kz"
+                    class="document-card__contact-link"
+                  >
+                    sales@gamechanger.kz
+                  </a>
+                </div>
+
+                <div class="document-card__contact-link-item">
+                  Телефон: +7 (700) 221-4996
+                </div>
+              </div>
+
+              <article class="document-card__company document-card__company--contacts">
+                <div class="document-card__company-item">ТОО «Gamechanger»</div>
+                <div class="document-card__company-item">БИН: 230940024402</div>
+                <div class="document-card__company-item document-card__company-item--address">
+                  Адрес: Республика Казахстан,<br />
+                  г. Караганда, ул. Заводская 17/1, офис 7
+                </div>
+              </article>
+
+              <p class="document-card__contact-note">
+                По вопросам, связанным с обработкой персональных данных, вы
+                можете связаться с нами.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <a href="/" class="privacy-page__back privacy-page__back--bottom">
+          ← Вернуться назад
+        </a>
+
+        <footer class="privacy-page__footer">
+          <p>© 2026 DOIT @GAMECHANGER · Будущее продаж уже здесь</p>
+
+          <div class="privacy-page__footer-links">
+            <a href="/privacy/page" class="privacy-page__footer-link">
+              Политика конфиденциальности
+            </a>
+            <span>|</span>
+            <a href="/terms/terms" class="privacy-page__footer-link">
+              Условия работы
+            </a>
+          </div>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>
