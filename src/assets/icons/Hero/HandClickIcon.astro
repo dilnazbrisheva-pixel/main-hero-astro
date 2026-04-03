@@ -1,0 +1,23 @@
+---
+import handClickIcon from './hand-click.svg?url';
+
+const {
+  alt = '',
+  width = 24,
+  height = 27,
+  class: astroClass = '',
+  className = '',
+  ...props
+} = Astro.props;
+
+const resolvedClassName = [astroClass, className].filter(Boolean).join(' ');
+---
+
+<img
+  src={handClickIcon}
+  alt={alt}
+  width={width}
+  height={height}
+  class={resolvedClassName}
+  {...props}
+/>

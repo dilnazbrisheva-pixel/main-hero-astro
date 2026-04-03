@@ -1,0 +1,208 @@
+---
+import CloudVsCorpIcon from '../../assets/icons/cloudVsCorp/Icon.astro';
+import styles from './CloudVsCorp.module.scss';
+
+type IconKey = 'disk' | 'speed' | 'coin' | 'update' | 'way';
+type CardTheme = 'gold' | 'blue';
+
+type AdvantageItem = {
+  icon: IconKey;
+  topic: string;
+  title: string;
+};
+
+type ComparisonCard = {
+  theme: CardTheme;
+  title: string;
+  subtitle: string;
+  advantages: AdvantageItem[];
+  suitableFor: string[];
+};
+
+const cards: ComparisonCard[] = [
+  {
+    theme: 'gold',
+    title: 'Коробка',
+    subtitle: 'Коробочная версия',
+    advantages: [
+      {
+        icon: 'disk',
+        topic: 'Размещение',
+        title: 'На вашем сервере(полный контроль)',
+      },
+      {
+        icon: 'speed',
+        topic: 'Скорость и нагрузка',
+        title: 'Зависит от вашего железа',
+      },
+      {
+        icon: 'coin',
+        topic: 'Стоимость',
+        title: 'Разовая + сервер + админ',
+      },
+      {
+        icon: 'update',
+        topic: 'Обновления',
+        title: 'Ставьте сами, когда удобно и после теста',
+      },
+      {
+        icon: 'way',
+        topic: 'Возможности',
+        title: 'Полный контроль и гибкость',
+      },
+    ],
+    suitableFor: [
+      'кастомизируется',
+      'высокая нагрузка и защита',
+      'уникальные фичи',
+      'экономия в долгосрочке.',
+    ],
+  },
+  {
+    theme: 'blue',
+    title: 'Облако',
+    subtitle: 'Облачная версия',
+    advantages: [
+      {
+        icon: 'disk',
+        topic: 'Размещение',
+        title: 'На общем сервере битрикс',
+      },
+      {
+        icon: 'speed',
+        topic: 'Скорость и нагрузка',
+        title: 'Стабильная, без настройки',
+      },
+      {
+        icon: 'coin',
+        topic: 'Стоимость',
+        title: 'Подписка «всё включено»',
+      },
+      {
+        icon: 'update',
+        topic: 'Обновления',
+        title: 'Автоматически',
+      },
+      {
+        icon: 'way',
+        topic: 'Возможности',
+        title: 'Стандартные функции',
+      },
+    ],
+    suitableFor: [
+      'быстро запускается',
+      'не нужен сис.админ',
+      'мало бюджета',
+      'меньше расхода на старте',
+    ],
+  },
+];
+---
+
+<dialog
+  class={styles.modal}
+  data-cloud-vs-corp-modal
+  aria-label="Окно сравнения"
+>
+  <div class={styles.panel}>
+    <div class={styles.cards}>
+      {cards.map((card) => (
+        <article class:list={[styles.card, card.theme === 'blue' ? styles.cardBlue : styles.cardGold]}>
+          <div class={styles.cardHead}>
+            <div class:list={[styles.badge, card.theme === 'blue' ? styles.badgeBlue : styles.badgeGold]}>
+              <CloudVsCorpIcon
+                name={card.theme === 'blue' ? 'cloud' : 'box'}
+                class={styles.badgeIcon}
+              />
+            </div>
+
+            <div class={styles.cardTitles}>
+              <h3 class:list={[styles.cardTitle, card.theme === 'blue' ? styles.titleBlue : styles.titleGold]}>
+                {card.title}
+              </h3>
+              <p class={styles.cardSubtitle}>{card.subtitle}</p>
+            </div>
+          </div>
+
+          <ul class={styles.advantages}>
+            {card.advantages.map((item) => (
+              <li class={styles.feature}>
+                <CloudVsCorpIcon
+                  name={item.icon}
+                  isBlue={card.theme === 'blue'}
+                  class={styles.featureIcon}
+                />
+
+                <div class={styles.featureCopy}>
+                  <span class={styles.featureTopic}>{item.topic}</span>
+                  <p class={styles.featureTitle}>{item.title}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <div class={styles.separator} aria-hidden="true"></div>
+
+          <div class={styles.footer}>
+            <h4 class={styles.footerTitle}>Подходит для:</h4>
+
+            <ul class={styles.points}>
+              {card.suitableFor.map((point) => (
+                <li class={styles.point}>
+                  <CloudVsCorpIcon
+                    name="check"
+                    isBlue={card.theme === 'blue'}
+                    class={styles.pointCheck}
+                  />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</dialog>
+
+<script is:inline>
+  const modal = document.querySelector('[data-cloud-vs-corp-modal]');
+
+  if (modal instanceof HTMLDialogElement) {
+    const openButtons = document.querySelectorAll('[data-open-cloud-vs-corp-modal]');
+
+    const syncBodyState = () => {
+      document.body.classList.toggle('cloud-vs-corp-modal-open', modal.open);
+    };
+
+    const openModal = (event) => {
+      event.preventDefault();
+
+      if (!modal.open) {
+        modal.showModal();
+      }
+
+      syncBodyState();
+    };
+
+    const closeModal = () => {
+      if (modal.open) {
+        modal.close();
+      }
+
+      syncBodyState();
+    };
+
+    openButtons.forEach((button) => {
+      button.addEventListener('click', openModal);
+    });
+
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    modal.addEventListener('close', syncBodyState);
+  }
+</script>

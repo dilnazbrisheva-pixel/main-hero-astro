@@ -1,0 +1,23 @@
+---
+import threeDLogo from './back logo.svg?url';
+
+const {
+  alt = '',
+  width = 1440,
+  height = 1455,
+  class: astroClass = '',
+  className = '',
+  ...props
+} = Astro.props;
+
+const resolvedClassName = [astroClass, className].filter(Boolean).join(' ');
+---
+
+<img
+  src={threeDLogo}
+  alt={alt}
+  width={width}
+  height={height}
+  class={resolvedClassName}
+  {...props}
+/>

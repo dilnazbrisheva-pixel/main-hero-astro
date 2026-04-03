@@ -1,0 +1,23 @@
+---
+import cloudPriceIcon from './cloud&price.svg?url';
+
+const {
+  alt = '',
+  width = 636,
+  height = 306,
+  class: astroClass = '',
+  className = '',
+  ...props
+} = Astro.props;
+
+const resolvedClassName = [astroClass, className].filter(Boolean).join(' ');
+---
+
+<img
+  src={cloudPriceIcon}
+  alt={alt}
+  width={width}
+  height={height}
+  class={resolvedClassName}
+  {...props}
+/>

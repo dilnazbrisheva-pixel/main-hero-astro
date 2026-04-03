@@ -1,0 +1,23 @@
+---
+import mouseIcon from './mouse.svg?url';
+
+const {
+  alt = '',
+  width = 12,
+  height = 15,
+  class: astroClass = '',
+  className = '',
+  ...props
+} = Astro.props;
+
+const resolvedClassName = [astroClass, className].filter(Boolean).join(' ');
+---
+
+<img
+  src={mouseIcon}
+  alt={alt}
+  width={width}
+  height={height}
+  class={resolvedClassName}
+  {...props}
+/>

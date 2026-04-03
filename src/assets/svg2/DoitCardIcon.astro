@@ -1,0 +1,62 @@
+---
+import doitCard from './doit.svg?url';
+
+const DOIT_CARD_DEFAULT_WIDTH = 515.6947631835942;
+const DOIT_CARD_DEFAULT_HEIGHT = 142.67060852050793;
+const DOIT_CARD_DEFAULT_PADDING = 10.95;
+const DOIT_CARD_DEFAULT_RADIUS = 28.53;
+const DOIT_CARD_DEFAULT_OPACITY = 1;
+
+const {
+  alt = '',
+  width = DOIT_CARD_DEFAULT_WIDTH,
+  height = DOIT_CARD_DEFAULT_HEIGHT,
+  padding = DOIT_CARD_DEFAULT_PADDING,
+  radius = DOIT_CARD_DEFAULT_RADIUS,
+  opacity = DOIT_CARD_DEFAULT_OPACITY,
+  class: astroClass = '',
+  className = '',
+  imageClassName = '',
+  style,
+  imageStyle,
+  ...props
+} = Astro.props;
+
+const numericWidth = typeof width === 'number' ? width : Number(width);
+const numericPadding = typeof padding === 'number' ? padding : Number(padding);
+const outerWidth =
+  Number.isFinite(numericWidth) && Number.isFinite(numericPadding)
+    ? numericWidth + numericPadding * 2
+    : undefined;
+
+const resolvedClassName = [astroClass, className].filter(Boolean).join(' ');
+const resolvedPadding = typeof padding === 'number' ? `${padding}px` : padding;
+const resolvedRadius = typeof radius === 'number' ? `${radius}px` : radius;
+const wrapperStyle = {
+  boxSizing: 'border-box',
+  opacity,
+  padding: resolvedPadding,
+  width: '100%',
+  ...(outerWidth ? { maxWidth: `${outerWidth}px` } : {}),
+  ...(style && typeof style === 'object' ? style : {}),
+};
+const resolvedImageStyle = {
+  borderRadius: resolvedRadius,
+  display: 'block',
+  height: 'auto',
+  width: '100%',
+  ...(imageStyle && typeof imageStyle === 'object' ? imageStyle : {}),
+};
+---
+
+<div class={resolvedClassName} style={wrapperStyle}>
+  <img
+    src={doitCard}
+    alt={alt}
+    width={width}
+    height={height}
+    class={imageClassName}
+    style={resolvedImageStyle}
+    {...props}
+  />
+</div>

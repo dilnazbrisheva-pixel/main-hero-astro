@@ -1,0 +1,337 @@
+﻿---
+import './Hero.scss';
+import CloudVsCorp from '../CloudVsCorp/CloudVsCorp.astro';
+
+import arrowIcon from '../../assets/icons/Hero/arrows13.88x13.88.svg?url';
+import messengerIcon from '../../assets/icons/Hero/brand-messenger.svg?url';
+import warehouseIcon from '../../assets/icons/Hero/building-warehouse.svg?url';
+import controlIcon from '../../assets/icons/Hero/cil-control.svg?url';
+import paymentIcon from '../../assets/icons/Hero/coin.svg?url';
+import fileIcon from '../../assets/icons/Hero/data-file.svg?url';
+import infinityIcon from '../../assets/icons/Hero/infinity.svg?url';
+import analyticsIcon from '../../assets/icons/Hero/internal-data.svg?url';
+import messageIcon from '../../assets/icons/Hero/message-2.svg?url';
+import peopleIcon from '../../assets/icons/Hero/peoples.svg?url';
+import automationIcon from '../../assets/icons/Hero/robot-one.svg?url';
+import processIcon from '../../assets/icons/Hero/robot-two.svg?url';
+import storageIcon from '../../assets/icons/Hero/solid-state-disk.svg?url';
+import mouseIcon from '../../assets/icons/Hero/mouse.svg?url';
+import handClickIcon from '../../assets/icons/Hero/hand-click.svg?url';
+import threeDLogo from '../../assets/svg2/back logo.svg?url';
+import doitCard from '../../assets/svg2/doit.svg?url';
+import cloudPriceIcon from '../../assets/svg2/cloud&price.svg?url';
+
+type PlanCard = {
+  label: string;
+  value: string;
+  icon: string;
+  valueIcon?: string;
+};
+
+type FeatureItem = {
+  icon: string;
+  label: string;
+  lines?: [string, string];
+  valueIcon?: string;
+};
+
+const quickLinks = [
+  { label: 'Битрикс24', href: '#hero' },
+  { label: 'Разработка', href: '#comparison' },
+  { label: 'Интеграции', href: '#consultation' },
+];
+
+const planCards: PlanCard[] = [
+  { label: 'Бесплатно', value: '5', icon: peopleIcon },
+  { label: 'Облако - Базовый', value: '5', icon: peopleIcon },
+  { label: 'Облако - Стандарт', value: '50', icon: peopleIcon },
+  { label: 'Облако - Проф', value: '100', icon: peopleIcon },
+  { label: 'Облако - Энтерпрайз', value: '250+', icon: peopleIcon },
+  { label: 'Коробка', value: '50 до', icon: peopleIcon, valueIcon: infinityIcon },
+];
+
+const includedFeatures: FeatureItem[] = [
+  { icon: peopleIcon, label: 'Кол-во сотрудников: 100' },
+  { icon: automationIcon, label: 'Степень автоматизации: 100%' },
+  { icon: controlIcon, label: 'Система управления: 100%' },
+  { icon: analyticsIcon, label: 'Степень аналитики: 100%' },
+  { icon: storageIcon, label: 'Хранилище: 1 ТБ' },
+  { icon: processIcon, label: 'Количество процессов:', valueIcon: infinityIcon },
+];
+
+const extraFeatures: FeatureItem[] = [
+  { icon: paymentIcon, label: 'Интеграция с системами оплат: да' },
+  { icon: messageIcon, label: 'Рассылки и автосообщения: да' },
+  {
+    icon: fileIcon,
+    label: 'Интеграция с 1С: встроенный модуль',
+    lines: ['Интеграция с 1С: встроенный', 'модуль'],
+  },
+  { icon: warehouseIcon, label: 'Складской учет: да' },
+  {
+    icon: messengerIcon,
+    label: 'Интеграция с мессенджерами и телефонией: да',
+    lines: ['Интеграция с мессенджерами', 'и телефонией: да'],
+  },
+];
+---
+
+<section class="hero">
+  <div class="hero__bg" aria-hidden="true">
+    <img
+      class="hero__bg-logo"
+      src={threeDLogo}
+      alt=""
+      width="1440"
+      height="1455"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+
+  <div id="hero" class="hero__container hero-left-glow-region">
+    <div class="hero__intro">
+      <div class="hero__heading">
+      <h1 class="hero__title">
+        <span class="hero__title-muted">Bitrix24 от</span>
+        <span class="hero__title-accent">Gamechanger</span>
+      </h1>
+
+      <p class="hero__subtitle">Умная автоматизация для вашего бизнеса</p>
+
+      </div>
+
+      <div class="hero__showcase">
+        <nav class="hero__nav" aria-label="Быстрые ссылки">
+          <ul class="hero__nav-list">
+            {quickLinks.map((item, index) => (
+              <li class="hero__nav-item">
+                <a href={item.href} class="hero__nav-link">
+                  <span class="hero__nav-text">{item.label}</span>
+                  <img
+                    src={arrowIcon}
+                    alt=""
+                    width="14"
+                    height="14"
+                    class={`hero__nav-arrow ${index === 1 ? 'hero__nav-arrow--down' : ''}`}
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div class="hero__stack-wrap">
+          <div class="hero__stack">
+            <div class="hero__panel hero__panel--small hero__panel--call">
+              <div class="hero__panel-overlay"></div>
+              <div class="hero__panel-inner">
+                <span class="hero__panel-label hero__panel-label--small">CALL-CENTER</span>
+              </div>
+            </div>
+
+            <div class="hero__panel hero__panel--medium hero__panel--portal">
+              <div class="hero__panel-overlay"></div>
+              <div class="hero__panel-shine"></div>
+              <div class="hero__panel-inner">
+                <span class="hero__panel-label hero__panel-label--portal">B2B ПОРТАЛ</span>
+              </div>
+            </div>
+
+            <div class="hero__doit-card-shell">
+              <img
+                class="hero__doit-card"
+                src={doitCard}
+                alt=""
+                width="516"
+                height="143"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+
+            <div class="hero__panel hero__panel--medium hero__panel--works">
+              <div class="hero__panel-overlay"></div>
+              <div class="hero__panel-shine"></div>
+              <div class="hero__panel-inner">
+                МОНТАЖНЫЕ РАБОТЫ
+              </div>
+            </div>
+
+            <div class="hero__panel hero__panel--small hero__panel--audit">
+              <div class="hero__panel-overlay"></div>
+              <div class="hero__panel-inner">
+                <span class="hero__panel-label hero__panel-label--small hero__panel-label--audit">
+                  АУДИТ ПОСТАВЩИКА
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero__mouse">
+            <img class="hero__mouse-icon" src={mouseIcon} alt="" width="47" height="47" />
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__legal">
+        <div class="hero__legal-links">
+          <a href="/terms" class="hero__legal-link">Политика конфиденциальности</a>
+          <span class="hero__legal-divider">|</span>
+          <a href="/terms" class="hero__legal-link">Условия работы</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="comparison" class="hero__comparison">
+      <div class="hero__comparison-copy">
+      <div class="hero__comparison-heading">
+        <div class="hero__comparison-heading-inner">
+          <h2 class="hero__comparison-title">
+            <span class="hero__comparison-title-nowrap">
+              Лицензии Bitrix24 <span class="hero__comparison-title-soft">«Коробка vs.</span>{' '}
+              <span class="hero__comparison-title-accent">Облако</span>
+              <span class="hero__comparison-title-soft">»</span>
+            </span>
+          </h2>
+
+          <a href="#comparison" class="hero__comparison-link" data-open-cloud-vs-corp-modal aria-haspopup="dialog">
+            <span class="hero__comparison-link-text">Сравнение</span>
+            <img src={arrowIcon} alt="" width="11" height="11" class="hero__comparison-link-arrow" />
+          </a>
+        </div>
+      </div>
+
+      <p class="hero__comparison-subtitle">
+        Выгодный бонус при покупке лицензии у Gamechanger
+      </p>
+
+      </div>
+
+      <div class="hero__comparison-grid">
+        <div class="hero__plan-list">
+          {planCards.map((card) => (
+            <div class="hero__plan-card">
+              <p class="hero__plan-label">{card.label}</p>
+
+              <div class="hero__plan-value">
+                <img src={card.icon} alt="" width="14" height="14" class="hero__plan-value-icon" />
+                <span>{card.value}</span>
+
+                {card.valueIcon && (
+                  <img
+                    src={card.valueIcon}
+                    alt=""
+                    width="16"
+                    height="9"
+                    class="hero__plan-value-icon hero__plan-value-icon--wide"
+                  />
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="hero__bonus-card">
+          <div class="hero__bonus-content">
+            <p class="hero__bonus-title">
+              <span class="hero__bonus-title-accent">Бонус</span>{' '}
+              <span class="hero__bonus-title-accent">Gamechanger</span> при покупке лицензии на год:
+            </p>
+
+            <p class="hero__bonus-subtitle">
+              Подарочный купон на наши услуги в размере
+              <span class="hero__bonus-amount">200 000 ₸</span>
+            </p>
+
+            <div class="hero__features-grid">
+              <div class="hero__feature-column">
+                {includedFeatures.map((feature) => (
+                  <div class="hero__feature">
+                    <img src={feature.icon} alt="" width="15" height="15" class="hero__feature-icon" />
+
+                    <span class="hero__feature-text-group">
+                      <span>{feature.label}</span>
+
+                      {feature.valueIcon && (
+                        <img
+                          src={feature.valueIcon}
+                          alt=""
+                          width="18"
+                          height="10"
+                          class="hero__feature-value-icon"
+                        />
+                      )}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <div class="hero__feature-column">
+                {extraFeatures.map((feature) => (
+                  <div class="hero__feature">
+                    <img src={feature.icon} alt="" width="15" height="15" class="hero__feature-icon" />
+
+                    {feature.lines ? (
+                      <span class="hero__feature-lines">
+                        <span>{feature.lines[0]}</span>
+                        <span>{feature.lines[1]}</span>
+                      </span>
+                    ) : (
+                      <span class="hero__feature-single">{feature.label}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div class="hero__price-grid">
+              <div class="hero__tariff">
+                <p class="hero__tariff-title">
+                  <span>Профессиональный</span>
+                  <span>Тариф</span>
+                </p>
+                <p class="hero__tariff-note">Полный пакет для масштабирования</p>
+              </div>
+
+              <div class="hero__price hero__price--year">
+                <span class="hero__price-value">652 800 ₸</span>
+                <span class="hero__price-period">год</span>
+              </div>
+
+              <div class="hero__price hero__price--month">
+                <span class="hero__price-value">68 000 ₸</span>
+                <span class="hero__price-period">месяц</span>
+              </div>
+            </div>
+          </div>
+
+          <img
+            class="hero__cloud-price"
+            src={cloudPriceIcon}
+            alt=""
+            width="636"
+            height="306"
+            decoding="async"
+          />
+        </div>
+      </div>
+
+      <div id="consultation" class="hero__consultation">
+        <h3 class="hero__consultation-title">Выбор нужно делать правильно</h3>
+
+        <p class="hero__consultation-text">
+          <span>Подходящий сервер, грамотные настройки и безопасность</span>
+          <span class="hero__consultation-text-accent">спасут от серьёзных потерь.</span>
+        </p>
+
+        <a href="https://api.whatsapp.com/send/?phone=77002214996&text&type=phone_number&app_absent=0" class="hero__consultation-button" target="_blank" rel="noopener noreferrer">
+          <span>Бесплатный совет</span>
+          <img src={handClickIcon} alt="" width="24" height="27" class="hero__consultation-button-icon" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<CloudVsCorp />
+

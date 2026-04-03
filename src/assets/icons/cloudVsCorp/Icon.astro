@@ -1,0 +1,65 @@
+---
+import boxSource from './Box.jsx?raw';
+import checkSource from './Check.jsx?raw';
+import cloudSource from './Cloud.jsx?raw';
+import coinSource from './Coin.jsx?raw';
+import diskSource from './Disk.jsx?raw';
+import speedSource from './Speed.jsx?raw';
+import updateSource from './Update.jsx?raw';
+import waySource from './Way.jsx?raw';
+
+type IconName = 'box' | 'check' | 'cloud' | 'coin' | 'disk' | 'speed' | 'update' | 'way';
+
+interface Props {
+  name: IconName;
+  isBlue?: boolean;
+  class?: string;
+}
+
+const { name, isBlue = false, class: className = '' } = Astro.props;
+
+const sourceMap: Record<IconName, string> = {
+  box: boxSource,
+  check: checkSource,
+  cloud: cloudSource,
+  coin: coinSource,
+  disk: diskSource,
+  speed: speedSource,
+  update: updateSource,
+  way: waySource,
+};
+
+const primaryColor = isBlue ? '#04bbd3' : '#D3C879';
+
+const normalizeSvg = (source: string) => {
+  let svg = source.match(/<svg[\s\S]*<\/svg>/)?.[0] ?? '';
+
+  svg = svg
+    .replace(/\{\.\.\.props\}/g, '')
+    .replace(/fill=\{isBlue \? '#04bbd3' : '#D3C879'\}/g, `fill="${primaryColor}"`)
+    .replace(/stroke=\{isBlue \? '#04bbd3' : '#D3C879'\}/g, `stroke="${primaryColor}"`)
+    .replace(/clipPath=/g, 'clip-path=')
+    .replace(/fillOpacity=/g, 'fill-opacity=')
+    .replace(/strokeOpacity=/g, 'stroke-opacity=')
+    .replace(/strokeWidth=/g, 'stroke-width=')
+    .replace(/strokeLinecap=/g, 'stroke-linecap=')
+    .replace(/strokeLinejoin=/g, 'stroke-linejoin=');
+
+  const idSuffix = `${name}-${Math.random().toString(36).slice(2, 10)}`;
+  const ids = Array.from(svg.matchAll(/id="([^"]+)"/g)).map((match) => match[1]);
+
+  for (const id of ids) {
+    const uniqueId = `${id}-${idSuffix}`;
+    svg = svg.replaceAll(`id="${id}"`, `id="${uniqueId}"`);
+    svg = svg.replaceAll(`url(#${id})`, `url(#${uniqueId})`);
+  }
+
+  svg = svg.replace('<svg', '<svg aria-hidden="true" focusable="false"');
+
+  return svg;
+};
+
+const markup = normalizeSvg(sourceMap[name]);
+---
+
+<span class={className} set:html={markup}></span>
